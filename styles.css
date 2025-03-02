@@ -1,0 +1,612 @@
+/* Global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+::selection {
+  color: rgb(11, 0, 48);
+  background: rgba(110, 188, 230, 0.675);
+}
+
+body {
+  background-color: rgba(255, 255, 255, 0.603);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Header styles */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 12vh;
+  padding: 10px;
+  background-color: rgb(0, 52, 65, 1);
+  color: #fff;
+  z-index: 1000;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 60px;
+}
+
+.vlab {
+  left: 50%;
+  font-size:xx-large;
+  font-weight: bold;
+}
+.nav-menu {
+  display: flex;
+  gap: 20px;
+}
+@media (min-width: 840px) {
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  .vlab {
+    margin-left: 15px; 
+  }
+}
+
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  padding-right: 10px;
+}
+.close-btn{
+  display: none;
+}
+.nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.nav-menu a {
+  margin-left: 15px;
+  padding: 15px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav-menu a:hover {
+  background: rgba(111, 248, 248, 0.74);
+  cursor: pointer;
+}
+
+.yourvlabtitle {
+  text-align: center;
+  background-color: white;
+  color: black;
+  padding: 20px 0;
+}
+
+/* Navigation styles */
+.pageview {
+  display: grid;
+  place-items: center;
+  padding: 10px 0;
+  background-color: #fff;
+}
+
+.navigation {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 20px;
+  background: rgb(0, 30, 37);
+  padding: 10px;
+  width: calc(100vw - 20vw);
+  justify-content: space-evenly;
+  color: white;
+}
+
+.navigation .link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 125px;
+  height: 115px;
+  padding: 10px;
+  margin: 2px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: white;
+  background-color: rgb(0, 30, 37);
+  transition: background-color 0.7s ease;
+  border: 2.5px solid rgb(215, 211, 211);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: .9rem;
+}
+
+.navigation .link:hover {
+  background-color: rgba(7, 238, 238, 0.8);
+}
+
+.navigation .link img {
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+
+/* Responsive styles */
+@media screen and (max-width: 840px) {
+  .header {
+    justify-content: space-between; 
+  }
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+  }
+  .menu-toggle {
+    display: block;
+  }
+  .close-btn{
+    display: block;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    height: 100%;
+    min-width: 200px;
+    flex-direction: column;
+    background-color: rgba(4, 74, 74, 0.74);
+    backdrop-filter: blur(8px);
+    transition: right 0.4s ease;
+  }
+
+  .nav-menu.show {
+    right: 0;
+  }
+  .navigation .link {
+    margin-top: 14px ;
+    margin-left: 6px;
+  }
+  .copy-button {
+    position: absolute;
+    padding-right: 500px;
+    text-size-adjust:smaller;
+  }
+  .container .title{
+    font-size: 2rem;
+  }
+}
+
+/* Content sections */
+.main_practical {
+  padding: 15px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1500px;
+}
+
+.container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: calc(100vw - 18vw);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  text-align: justify;
+}
+
+.container .title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+/* General List Styling for Theory and Procedure Containers you may adjust as per your need */
+
+/* Remove default list styles */
+#theory ul, #procedure ul, #theory ol, #procedure ol {
+  list-style: none; /* Remove default bullet points and numbers */
+  padding-left: 25px; /* Initial indentation for all lists */
+  margin-bottom: 20px; /* Spacing between lists */
+  list-style-position: inside; /* Align list markers with text */
+  font-size: 1rem; /* Standard font size for readability */
+  color: #333; /* Standard dark color for text */
+}
+
+/* List Item Styling */
+#theory li, #procedure li {
+  line-height: 1.6; /* Increased line height for better readability */
+  margin-bottom: 12px; /* Spacing between list items */
+  position: relative; /* Positioning for custom bullets/numbers */
+}
+
+/* Unordered List (ul) Bullet Styling */
+#theory ul li::before, #procedure ul li::before {
+  content: "\2022"; /* Unicode bullet character */
+  position: absolute;
+  left: -20px; /* Adjusting position of the bullet */
+  color: #474a4d; /* Dark blue for professional look */
+  font-size: 1.4rem; /* Moderate size for the bullet */
+  top: 50%; /* Align bullet vertically */
+  transform: translateY(-50%); /* Corrects vertical alignment */
+}
+
+/* Ordered List (ol) Numbering Styling */
+#theory ol li::before, #procedure ol li::before {
+  content: counter(list-item) ". "; /* Numeric list */
+  position: absolute;
+  left: -30px; /* Space between number and text */
+  color: #474a4d; /* Standard blue color for numbers */
+  font-weight: bold; /* Bold numbering */
+  font-size: 1.2rem; /* Slightly larger number */
+  top: 50%; /* Align number vertically */
+  transform: translateY(-50%); /* Corrects vertical alignment */
+}
+
+/* Nested List Styling */
+#theory ul ul, #procedure ul ul, #theory ol ol, #procedure ol ol {
+  padding-left: 35px; /* Increased indentation for nested lists */
+}
+
+#theory ul ul li, #procedure ul ul li, #theory ol ol li, #procedure ol ol li {
+  font-size: 1rem; /* Slightly smaller text for nested items */
+}
+
+
+
+/* Link Styling within List Items */
+#theory li a, #procedure li a {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color */
+}
+
+
+/* Code block styles */
+.switch-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.switch-container label {
+  cursor: pointer;
+  padding: 10px 20px;
+  background-color: #005256;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  margin: 0 10px;
+}
+
+
+.code-blocks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-block {
+  display: none;
+}
+
+.code-block.active {
+  display: block;
+}
+
+
+.copy-button:hover {
+  background-color: #555;
+}
+.code-block {
+  position: relative;
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.code-block {
+  display: none;
+}
+
+.code-block.active {
+  display: block;
+}
+
+
+.code-content {
+  position: relative;
+  min-width: 1080px;
+}
+
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  background-color: #464646;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.copy-button.copied {
+  background-color: #171717;
+  color: white;
+}
+
+.code-content:hover .copy-button {
+  display: block;
+}
+
+.copy-button {
+  display: none;
+}
+.switch-container input[type="radio"]:checked + label {
+  background-color:#029ba6;
+  display: block;
+  border: 2px solid rgb(47, 255, 220);
+  color: rgb(238, 255, 0);
+}
+
+.language-cpp,
+.language-python {
+  padding: 20px;
+  margin: 0;
+  font-size: 12px;
+  white-space: pre-wrap;
+}
+
+/* Quiz */
+#quiz {
+  text-align: center;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#quiz .title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#question {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.choices .choice {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.choices .choice:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.next-button, .save-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.next-button:hover {
+  background-color: #0056b3;
+}
+
+#retake-btn {
+  display: none;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 50%;
+  max-width: 250px;
+}
+
+#retake-btn:hover {
+  background-color: #218838;
+}
+#quiz-report {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.quiz-report-question {
+  margin-bottom: 15px;
+}
+
+.quiz-report-question p {
+  font-weight: bold;
+}
+
+.quiz-report-question ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+
+/* tnt */
+/* Lists styling */
+#tnt .content {
+  padding: 10px;
+  background-color: #ffffff; 
+
+}
+
+#tnt .content span{
+  display: block;
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: #2e3035;
+  margin-bottom: 7px;
+  margin-top: 16px; /* Space above each section */
+}
+
+/* List Styling */
+.ref-list, .tools-list {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.ref-list li, .tools-list li {
+  padding: 10px;
+  background-color: #f9fafb; 
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333; 
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.ref-list li a, .tools-list li span {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 400;
+  transition: color 0.3s ease; /* Transition for link hover effect */
+}
+
+.ref-list li:hover, .tools-list li:hover {
+  background-color: #e6f0ff; /* Soft blue hover effect */
+}
+
+.ref-list li a:hover {
+  color: #0073e6; /* Change link color on hover */
+}
+
+/* Mentors & Students Section Styling */
+.ref-list li, .tools-list li {
+  font-size: 1.1rem; 
+  padding-left: 15px;
+}
+
+/* Styling for individual links */
+.ref-list li a {
+  color: #222529; /* Soft blue color for links */
+  font-weight: 500; /* Bold the links slightly */
+}
+
+
+
+/* Tile control  */
+#aim,
+#theory,
+#procedure,
+#code,
+#result,
+#quiz,
+#practice,
+#references,
+#tnt {
+  display: none;
+}
+#aim {
+  display: block;
+}
+
+/* Adjustments */
+@media screen and (max-width: 500px) {
+  .practical {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding: 5px;
+    font-size: smaller;
+  }
+  .navigation .link {
+    width: 62px;
+    height: 74px;
+    padding: 10px;
+    font-size: 0.5rem;
+    border: 2px solid rgb(215, 211, 211);
+    margin-top: 5px ;
+    margin-left: 6px;
+    border-radius: 14px;
+  }
+  .navigation .link img {
+    height: 30px;
+    width: auto;
+    margin-bottom: 10px;
+  }
+  .container {
+    padding: 5px;
+    margin: 0;
+    text-align: left;
+    width: calc(100vw- 5vw);
+  }
+  .choices {
+    justify-content: space-between;
+  }
+
+  .choices .choice {
+    width: 300px;
+    margin-left: 10px;
+  }
+  .code-block {
+    overflow: scroll;
+    width: 320px;
+  }
+  #code.container {
+    width: 330px;
+  }
+  .container .title{
+    font-size: 1rem;
+  }
+}
+
