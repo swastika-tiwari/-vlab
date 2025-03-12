@@ -123,15 +123,36 @@
         <p>
             This interactive visualization explains how functions process 
             <strong>Positional Arguments</strong>, <strong>Default Arguments</strong>, and <strong>Keyword Arguments</strong>.
-            Imagine a checkout conveyor belt where items (arguments) move towards the function!
+            Imagine a checkout conveyor belt where items (treated as arguments) move towards the bill counter (function)!<br> <br>
+
+            Now say a customer when visits this shop, always buys a packet of <b>chips of $15</b> as the third and last item, so it can be taken as our default argument as it is the customer's default work unless specified differently.
+            <br><br>
+            Lets say the shop has a <b>fixed discount of -5$</b> for all customers, unless a customer carries a separate coupon voucher, it will also be taken as a default argument, when the customer carries a coupon voucher then it is applied as usually shops dont allow two discount offers to be applied.
+            Here, the customer carries a personal -10$ coupon so that is applied instead<br><br>
+            Other than this we assume that this customer takes 2 extra items, here the customer has taken <b>apple of $10</b> and <b>banana of $15</b>
         </p>
         <pre>
-def process_items(item1, item2, default_item="Chips", discount=5):
-    print(f"Positional: {item1}, {item2}")
-    print(f"Default: {default_item}")
-    print(f"Keyword: Discount = {discount}%")
-
-process_items("Apple", "Banana", discount=10)
+            # Define new items dynamically
+            items = {
+            "Apple": 10,
+            "Banana": 20,
+            "Chips": 15,
+            "Orange": 25,
+            "Mango": 40
+            }
+                        
+            # Function to process items
+            def process_items(item1, item2, default="Chips", discount=5):
+                total_price = items.get(item1, 0) + items.get(item2, 0) + items.get(default, 0)
+                discounted_price = total_price - discount   # Apply discount
+                        
+                print(f"Items Purchased: {item1}, {item2}, {default}")
+                print(f"Total Price: ₹{total_price}")
+                print(f"Discount Applied: {discount}")
+                print(f"Final Price After Discount: ₹{discounted_price:.2f}")
+                        
+            # Example: Calling with specific items
+            process_items("Apple", "Banana", discount=10)
         </pre>
         <div class="conveyor-belt" id="belt"></div>
         <div class="output-container">
@@ -139,9 +160,10 @@ process_items("Apple", "Banana", discount=10)
             <div class="output-box default" id="output-default">0</div>
             <div class="output-box keyword" id="output-keyword">0</div>
         </div>
+        <div> Positional&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;  Default&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  Keyword </div>
         <button onclick="startConveyor()">Start Conveyor</button>
         <p id="current-discount" style="font-size: 20px; font-weight: bold; margin-top: 10px;">
-            Current Discount: -5%
+            Current Discount: -5
         </p>
         <!-- New Bill Section -->
 <div class="container" id="bill-container" style="display: none;">
@@ -156,11 +178,7 @@ process_items("Apple", "Banana", discount=10)
         max-width: 400px;
         margin: auto;
         border: 2px solid black;">
-Item                 Price
------------------------------
-Apple               $10
-Banana              $20
-Chips               $15
+
 Shop Discount       <span style="text-decoration: line-through;">-$5</span>
 Customer Discount   -$10
 -----------------------------
@@ -179,6 +197,16 @@ Total Price:        <span id="total-price"></span>
     </ul>
     <p>
         The circles above update dynamically as each argument is processed, showing how values are assigned in real-time.
+    </p>
+    <p>Item &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;                 Price<br>
+        -----------------------------<br>
+        &nbsp; &nbsp;Apple&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;                $10<br>
+        &nbsp; &nbsp;Banana&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;              $20<br>
+        &nbsp; &nbsp;Chips&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;              $15<br>
+        Shop Discount&nbsp; &nbsp; &nbsp; &nbsp;       <span style="text-decoration: line-through;">-$5</span><br>
+        &nbsp; &nbsp;&nbsp; Customer Discount&nbsp; &nbsp; &nbsp; -$10<br>
+-----------------------------<br>
+
     </p>
     <h3>Total Value: <span id="total-value" style="font-size: 24px; color: #ffeb3b;">$0</span></h3>
 </div>
