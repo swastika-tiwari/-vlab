@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Runner</title>
+    
+    <!-- Pyodide for Python Execution -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.22.1/full/pyodide.js"></script>
+
+    <!-- CodeMirror for Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+
+    <style>
+        body { 
+            font-family: 'Courier New', monospace; 
+            text-align: center; 
+            background-color: #1e1e1e; 
+            color: white; 
+            margin: 0; 
+            padding: 20px;
+        }
+        .container { 
+            max-width: 700px; 
+            margin: auto; 
+            padding: 20px; 
+            background: #2d2d2d; 
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+        .CodeMirror { 
+            border: 1px solid #ccc; 
+            height: auto; 
+            font-size: 16px;
+            padding-left: 15px; /* Extra space between numbers and code */
+        }
+        .CodeMirror-linenumbers {
+            width: 40px !important; /* Increased line number width */
+        }
+        .CodeMirror-gutter-elt {
+            padding-left: 8px !important; /* Ensures spacing from code */
+        }
+        button { 
+            background-color: #4CAF50; 
+            color: white; 
+            border: none; 
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        button:hover { background-color: #45a049; }
+        pre { 
+            background: #252526; 
+            color: #d4d4d4; 
+            padding: 10px; 
+            border-radius: 5px; 
+            text-align: left; 
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>📝 Python Code Runner</h2>
+        <p>Type Python code below and click "Run" to execute it.</p>
+
+        <!-- Code Editor -->
+        <textarea id="pythonCode">
+def process_items(item1, item2, default_item="Chips", discount=5):
+    print(f"Positional:\t{item1}, {item2}")
+    print(f"Default:\t{default_item}")
+    print(f"Keyword:\tDiscount = {discount}%")
+    
+    total_amount = 100 - (100 * discount / 100)  # Example calculation
+    print(f"Total Amount:\t${total_amount:.2f}")
+
+process_items("Apple", "Banana", discount=10)
+        </textarea>
+
+        <br>
+        <button onclick="runPythonCode()">Execute</button>
+
+        <h3>Output:</h3>
+        <pre id="output">Click "Run" to see the result.</pre>
+    </div>
+
+    <script>
+        let editor = CodeMirror.fromTextArea(document.getElementById("pythonCode"), {
+            mode: "python",
+            lineNumbers: true,
+            theme: "dracula",
+            indentUnit: 4,   // Proper indentation
+            lineWrapping: true
+        });
+
+        async function runPythonCode() {
+            let outputElement = document.getElementById("output");
+            outputElement.textContent = "Running...";
+
+            let pyodide = await loadPyodide();
+            let code = editor.getValue();
+
+            try {
+                let result = pyodide.runPython(`
+import sys
+from io import StringIO
+output_buffer = StringIO()
+sys.stdout = output_buffer
+
+${code}
+
+sys.stdout = sys.__stdout__
+output_buffer.getvalue()
+                `);
+                outputElement.textContent = result;
+            } catch (error) {
+                outputElement.textContent = "Error: " + error.message;
+            }
+        }
+    </script>
+
+</body>
+</html>
