@@ -85,44 +85,42 @@ document.querySelectorAll(".copy-button").forEach((button) => {
 // Quiz Logic
 const questions = [
   {
-    question: `Q1) What will the following code output?
-    def greet(name, age):
-        print("Hello",name, ". You are ",age," years old.")
-    greet("Alice", 25)`,
-    choices: ["Hello, Alice. You are 25 years old.", "Hello, 25. You are Alice years old.", 
-                "Error: age is missing", "Error: name is missing"],
-    correctAnswers: [0]
-  },
-  {
-    question: `Q2) Which of the following is NOT a valid way to call the function below?
-            def add_numbers(a, b=10): 
-                return a + b`,
+    question: `Q1) Which of the following is not a valid way to call the function below?: 
+            def add_numbers(a, b=10)`,
     choices: ["add_number(5)", "add_number(3, 15)",
                 "add_number(a=4, b=19)", "add_number(b=3, a)"],
     correctAnswers: [3]
   },
   {
-    question: `Q3)Which of the following is not true about function arguments?`,
-    choices: ["A function in Python can have any number of arguments",
+    question: `Q2) Which of the following is not true about arguments?`,
+    choices: ["A function can have any number of arguments",
               "All the arguments must be passed while calling the function", 
-              "A function can be defined without any argument", 
-              "All of the aabove"],
+              "A function can be defined without an argument", 
+              "All of the above"],
     correctAnswers: [1]
   },
   {
-    question: "Q4) Which of the following statements is True for Keyword Arguments?",
-    choices: ["We can pass the keywords as the arguments", 
-              "We can give the argument in a particular order", 
-              "We can equate the value to the corresponding parameter name while passing", 
-              "All the above"],
+    question: "Q3) Which of the following statements is true for keyword arguments?",
+    choices: ["We can pass the keywords as arguments", 
+              "We have to pass the arguments in a specific order", 
+              "We can equate the argument value to the corresponding parameter name while passing", 
+              "All of the above"],
     correctAnswers: [2]
   },
   {
-    question: "Q5) Which of the following do not give any error?",
-    choices: ["def pow(a=1,b): return a**b pow(5)",
-                "def pow(a,b=0): return a**b pow(3)",
-                "def pow(a,b): return a**b pow(6)",
-                "None of the above"],
+    question: "Q4) What is true about positional arguments?",
+    choices: ["They must be passed in the same order as defined in the function",
+                "They can be passed in any order as long as all argumnets are provided",
+                "They are always optional when calling a function",
+                "They must have default values"],
+    correctAnswers: [0]
+  },
+  {
+    question: "Q5) What happens when a function parameter has a default argument and the caller does not provide a value for it?",
+    choices: ["The function raises an error",
+                "The function uses the specified default value",
+                "The function skips that parameter",
+                "The function assigns None to that parameter by default"],
     correctAnswers: [1]
   },
   ];
@@ -140,7 +138,7 @@ const questions = [
   
   function showQuestion() {
       let currentQuestion = questions[currentQuestionIndex];
-      questionElement.textContent = currentQuestion.question;
+      questionElement.innerHTML = currentQuestion.question;
       choicesContainer.innerHTML = "";
   
       currentQuestion.choices.forEach((choice, index) => {
