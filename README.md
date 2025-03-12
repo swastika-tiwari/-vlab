@@ -17,14 +17,16 @@ A **lightweight and fast** Virtual Lab (V-Lab) template built using **HTML, CSS,
 
 ```
 vlab-template-v/
-├── images/       # Static assets (logos, icons, etc.)
-├── index.html    # Main HTML file
-├── styles.css    # Global styles
-├── script.js     # Core JavaScript logic
-├── LICENSE       # MIT license
-├── .gitignore    # Git ignore file
-└── README.md     # Project documentation
+├── images/            # Static assets (logos, icons, etc.)
+├── index.html         # Main HTML file
+├── simulation.html    # Simulation file
+├── python.html        # Python code runner file
+├── styles.css         # Global styles
+├── script.js          # Core JavaScript logic
+├── LICENSE            # MIT license
+├── .gitignore         # Git ignore file
+└── README.md          # Project documentation
 ```
 
 ---
-"# vlab-project" 
+"# vlab" 
