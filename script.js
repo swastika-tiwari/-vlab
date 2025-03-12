@@ -158,20 +158,8 @@ const questions = [
   }
   
   function toggleSelection(selectedIndex) {
-      // Toggle selection for multiple answers
-      if (!userAnswers[currentQuestionIndex]) {
-          userAnswers[currentQuestionIndex] = [];
-      }
-  
-      const answerIndex = userAnswers[currentQuestionIndex].indexOf(selectedIndex);
-  
-      if (answerIndex > -1) {
-          // Remove the selection if already selected
-          userAnswers[currentQuestionIndex].splice(answerIndex, 1);
-      } else {
-          // Add the selection
-          userAnswers[currentQuestionIndex].push(selectedIndex);
-      }
+      // Store only one selected answer per question
+      userAnswers[currentQuestionIndex] = [selectedIndex];
   
       // Highlight selected buttons
       const choiceButtons = document.querySelectorAll(".choice");
