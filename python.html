@@ -15,7 +15,7 @@
 
     <style>
         body { 
-            font-family: 'Lucida Sans Unicode', monospace; 
+            font-family: 'Courier New', monospace; 
             text-align: center; 
             background-color: #1e1e1e; 
             color: white; 
@@ -34,13 +34,8 @@
             border: 1px solid #ccc; 
             height: auto; 
             font-size: 16px;
-            padding-left: 15px; /* Extra space between numbers and code */
-        }
-        .CodeMirror-linenumbers {
-            width: 40px !important; /* Increased line number width */
-        }
-        .CodeMirror-gutter-elt {
-            padding-left: 8px !important; /* Ensures spacing from code */
+            padding: 10px;
+            width: 100%;
         }
         button { 
             background-color: #4CAF50; 
@@ -68,34 +63,47 @@
 
     <div class="container">
         <h2>📝 Python Code Runner</h2>
-        <p>Type Python code below and click "Execute" to execute it.</p>
+        <p>Type Python code below and click "Run" to execute it.</p>
 
         <!-- Code Editor -->
         <textarea id="pythonCode">
-def process_items(item1, item2, default_item="Chips", discount=5):
-    print(f"Positional:\t{item1}, {item2}")
-    print(f"Default:\t{default_item}")
-    print(f"Keyword:\tDiscount = {discount}%")
-    
-    total_amount = 100 - (100 * discount / 100)  # Example calculation
-    print(f"Total Amount:\t${total_amount:.2f}")
-
+# Define new items dynamically
+items = {
+"Apple": 10,
+"Banana": 20,
+"Chips": 15,
+"Orange": 25,
+"Mango": 40
+}
+            
+# Function to process items
+def process_items(item1, item2, default="Chips", discount=5):
+    total_price = items.get(item1, 0) + items.get(item2, 0) + items.get(default, 0)
+    discounted_price = total_price - discount   # Apply discount
+            
+    print(f"Items Purchased: {item1}, {item2}, {default}")
+    print(f"Total Price: ₹{total_price}")
+    print(f"Discount Applied: {discount}")
+    print(f"Final Price After Discount: ₹{discounted_price:.2f}")
+            
+# Example: Calling with specific items
 process_items("Apple", "Banana", discount=10)
+            
         </textarea>
 
         <br>
         <button onclick="runPythonCode()">Execute</button>
 
         <h3>Output:</h3>
-        <pre id="output">Click "Execute" to see the result.</pre>
+        <pre id="output">Click "Run" to see the result.</pre>
     </div>
 
     <script>
         let editor = CodeMirror.fromTextArea(document.getElementById("pythonCode"), {
             mode: "python",
-            lineNumbers: true,
+            lineNumbers: false,  // 🔥 Removed Line Numbers
             theme: "dracula",
-            indentUnit: 4,   // Proper indentation
+            indentUnit: 4,
             lineWrapping: true
         });
 
