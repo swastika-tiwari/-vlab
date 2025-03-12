@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conveyor Belt Analogy</title>
+    <title>Function Arguments - Conveyor Belt Analogy</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -11,12 +11,12 @@
             margin: 0;
             padding: 0;
             color: white;
+            text-align: center;
         }
         header {
             background: #0288d1;
             color: white;
             padding: 15px;
-            text-align: center;
             font-size: 28px;
             font-weight: bold;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -30,16 +30,17 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         p {
-            font-size: 16px;
-            line-height: 1.8;
+            font-size: 18px;
+            line-height: 1.6;
         }
         pre {
             background: #1e2a37;
             padding: 15px;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 16px;
             overflow-x: auto;
             color: #81d4fa;
+            text-align: left;
         }
         .conveyor-belt {
             display: flex;
@@ -52,107 +53,65 @@
             margin: 20px 0;
             background: linear-gradient(90deg, #e3f2fd 50%, #b3e5fc 50%);
             background-size: 40px 40px;
-            animation: moveBelt 4s linear infinite;
+            animation: moveBelt 3s linear infinite;
             overflow: hidden;
         }
         @keyframes moveBelt {
             0% { background-position: 0 0; }
             100% { background-position: 40px 0; }
         }
-        .paused {
-            animation-play-state: paused;
-        }
         .argument {
             position: absolute;
             top: 20px;
-            width: 120px;
-            height: 40px;
-            line-height: 40px;
+            width: 140px;
+            height: 50px;
+            line-height: 50px;
             background: #0288d1;
             color: white;
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 16px;
             text-align: center;
             font-weight: bold;
-            animation: moveArgs 8s linear forwards;
+            animation: moveArgs 6s linear forwards, bounce 1s ease infinite;
         }
         @keyframes moveArgs {
             0% { left: -150px; }
             100% { left: 100%; }
         }
-        .paused-args {
-            animation-play-state: paused;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
-        .midpoint {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 2px;
-            height: 100%;
-            background: #ff5722;
-            z-index: 10;
-        }
-        .function-processor {
-            margin-top: 20px;
-            padding: 20px;
-            border: 2px solid #0288d1;
-            background: #e0f7fa;
-            border-radius: 10px;
-        }
-        .step-explanation {
-            background: #333;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-            border-left: 5px solid #0288d1;
-            font-size: 18px;
-            line-height: 1.8;
-            color: white;
-            font-weight: bold;
-            text-align: center;
-        }
-        .output-visual {
+        .output-container {
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
         }
         .output-box {
-            width: 120px;
-            height: 120px;
-            line-height: 120px;
+            width: 140px;
+            height: 140px;
+            line-height: 140px;
             text-align: center;
             border: 3px solid #333;
             border-radius: 50%;
             font-size: 20px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s ease;
         }
-        .positional {
-            background: #ffab91;
-            color: #d84315;
-        }
-        .args {
-            background: #81c784;
-            color: #1b5e20;
-        }
-        .kwargs {
-            background: #64b5f6;
-            color: #0d47a1;
-        }
+        .positional { background: #ffab91; color: #d84315; }
+        .default { background: #81c784; color: #1b5e20; }
+        .keyword { background: #64b5f6; color: #0d47a1; }
         button {
-            margin: 10px;
-            padding: 12px 24px;
-            border: none;
             background: #0288d1;
             color: white;
-            font-size: 16px;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
             border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s;
+            margin-top: 20px;
         }
         button:hover {
-            background: #01579b;
+            background: #0277bd;
         }
     </style>
 </head>
@@ -162,132 +121,158 @@
     </header>
     <div class="container">
         <p>
-            This visualization explains how functions process <strong>Positional Arguments</strong>, <strong>*args</strong>, and <strong>**kwargs</strong>. 
-            Each item on the conveyor belt represents an argument passed to the function. 
-            The circles below the conveyor belt display the cumulative effect of these arguments.
+            This interactive visualization explains how functions process 
+            <strong>Positional Arguments</strong>, <strong>Default Arguments</strong>, and <strong>Keyword Arguments</strong>.
+            Imagine a checkout conveyor belt where items (arguments) move towards the function!
         </p>
-
         <pre>
-def process_arguments(*args, **kwargs):
-    positional_sum = sum(args)
-    kwargs_sum = sum(kwargs.values())
-    return positional_sum, kwargs_sum
+def process_items(item1, item2, default_item="Chips", discount=5):
+    print(f"Positional: {item1}, {item2}")
+    print(f"Default: {default_item}")
+    print(f"Keyword: Discount = {discount}%")
+
+process_items("Apple", "Banana", discount=10)
         </pre>
-
-        <div class="conveyor-belt" id="belt">
-            <div class="midpoint"></div>
-        </div>
-
-        <div id="dynamic-explanation" class="step-explanation">
-            Explanation will update here as each item is processed.
-        </div>
-
-        <div class="output-visual" id="output-visual">
+        <div class="conveyor-belt" id="belt"></div>
+        <div class="output-container">
             <div class="output-box positional" id="output-positional">0</div>
-            <div class="output-box args" id="output-args">0</div>
-            <div class="output-box kwargs" id="output-kwargs">0</div>
+            <div class="output-box default" id="output-default">0</div>
+            <div class="output-box keyword" id="output-keyword">0</div>
         </div>
-
-        <div style="text-align: center;">
-            <button id="play-pause" onclick="toggleAnimation()">Pause</button>
-            <button onclick="startConveyor()">Start Conveyor</button>
-        </div>
-
-        <h3>What Do the Circles Represent?</h3>
-        <ul>
-            <li><strong>Orange Circle (Positional Arguments):</strong> Sum of all positional arguments, like essential items that must be added to the cart in order.</li>
-            <li><strong>Green Circle (*args):</strong> Sum of all additional items, such as extra products that don't need a fixed position but are part of the order.</li>
-            <li><strong>Blue Circle (**kwargs):</strong> Sum of key-value pairs, like optional special items (discounts, coupons) in your cart.</li>
-        </ul>
-
-        <h3>Real-World Use of Functions in Shopping:</h3>
-        <p>
-            Functions in programming are like the checkout process at a store. You bring in a set of items (arguments) in various ways. 
-            Some items are mandatory (positional), others are optional (like discounts or loyalty points) and are passed as keyword arguments or extra items in the cart.
+        <button onclick="startConveyor()">Start Conveyor</button>
+        <p id="current-discount" style="font-size: 20px; font-weight: bold; margin-top: 10px;">
+            Current Discount: -5%
         </p>
+        <!-- New Bill Section -->
+<div class="container" id="bill-container" style="display: none;">
+    <h2>🧾 Final Bill</h2>
+    <pre id="bill" style="
+        background: white; 
+        color: black; 
+        font-family: monospace; 
+        padding: 15px; 
+        border-radius: 8px; 
+        text-align: left;
+        max-width: 400px;
+        margin: auto;
+        border: 2px solid black;">
+Item                 Price
+-----------------------------
+Apple               $10
+Banana              $20
+Chips               $15
+Shop Discount       <span style="text-decoration: line-through;">-$5</span>
+Customer Discount   -$10
+-----------------------------
+Total Price:        <span id="total-price"></span>
+    </pre>
+</div>
+<div class="container">
+    <h2>Understanding the Circles</h2>
+    <p>
+        As the items (arguments) move on the conveyor belt, they get placed into different categories based on how they were passed into the function.
+    </p>
+    <ul style="text-align: left; font-size: 18px; max-width: 700px; margin: auto;">
+        <li><span style="color: #d84315; font-weight: bold;">🔴 Positional Arguments:</span> The first two values provided to the function. Here, "Apple" and "Banana" are assigned based on their position in the function call.</li><br>
+        <li><span style="color: #1b5e20; font-weight: bold;">🟢 Default Arguments:</span> If an argument is not provided in the function call, the default value is used. In this case, "Chips" is used by default.</li><br>
+        <li><span style="color: #0d47a1; font-weight: bold;">🔵 Keyword Arguments:</span> These are explicitly defined in the function call, overriding the default value. Here, "discount" is provided as 10 instead of the default 5.</li><br>
+    </ul>
+    <p>
+        The circles above update dynamically as each argument is processed, showing how values are assigned in real-time.
+    </p>
+    <h3>Total Value: <span id="total-value" style="font-size: 24px; color: #ffeb3b;">$0</span></h3>
+</div>
 
-        <h3>Why Use Functions?</h3>
-        <p>
-            Functions help make code reusable, modular, and easier to debug. They allow us to handle different types of inputs flexibly, just like how a shopping cart allows for different combinations of products, discounts, and offers.
-        </p>
-    </div>
+<script>
+    function startConveyor() {
+        const belt = document.getElementById('belt');
+        const outputPositional = document.getElementById('output-positional');
+        const outputDefault = document.getElementById('output-default');
+        const outputKeyword = document.getElementById('output-keyword');
+        const totalValueElement = document.getElementById('total-value');
 
-    <script>
-        let isPaused = false;
-        let explanationTimeouts = []; // To keep track of timeouts for the explanation updates
+        belt.innerHTML = '';
+        outputPositional.textContent = "0";
+        outputDefault.textContent = "0";
+        outputKeyword.textContent = "-5"; // Start with discount -5
+        totalValueElement.textContent = "$0"; // Reset total value
 
-        function toggleAnimation() {
-            const belt = document.getElementById('belt');
-            const args = document.querySelectorAll('.argument');
-            const playPauseButton = document.getElementById('play-pause');
-            const explanation = document.getElementById('dynamic-explanation');
+        let totalPositional = 0;
+        let totalDefault = 0;
+        let totalKeyword = -5; // Initial discount value
 
-            isPaused = !isPaused;
+        const items = [
+            { name: 'Apple', price: 10, type: 'positional' },
+            { name: 'Banana', price: 20, type: 'positional' },
+            { name: 'Chips (Default)', price: 15, type: 'default' },
+            { name: 'Discount', price: -5, type: 'keyword' }
+        ];
 
-            belt.classList.toggle('paused');
-            args.forEach(arg => arg.classList.toggle('paused-args'));
+        let discountValue; // Store reference for discount update
 
-            playPauseButton.textContent = isPaused ? 'Play' : 'Pause';
-
-            // If paused, clear all explanation timeouts
-            if (isPaused) {
-                explanationTimeouts.forEach(timeout => clearTimeout(timeout));
-                explanation.textContent = 'Paused';  // Display 'Paused' when paused
-            } else {
-                explanation.textContent = '';  // Reset explanation text when resumed
-            }
+        function updateTotal() {
+            const total = totalPositional + totalDefault + totalKeyword;
+            totalValueElement.textContent = `$${total}`;
         }
 
-        function startConveyor() {
-            const belt = document.getElementById('belt');
-            const explanation = document.getElementById('dynamic-explanation');
-            const outputPositional = document.getElementById('output-positional');
-            const outputArgs = document.getElementById('output-args');
-            const outputKwargs = document.getElementById('output-kwargs');
+        function processItem(item, delay) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'argument';
+                    div.style.animationDelay = `0s`;
 
-            belt.innerHTML = '';
-            explanation.textContent = '';
-            outputPositional.textContent = '0';
-            outputArgs.textContent = '0';
-            outputKwargs.textContent = '0';
+                    const wrapper = document.createElement('div');
+                    wrapper.style.display = "flex";
+                    wrapper.style.flexDirection = "column";
+                    wrapper.style.alignItems = "center";
 
-            const positional = ['Apple $10', 'Banana $20'];
-            const args = ['Grapes $5', 'Orange $15'];
-            const kwargs = { "Discount 10%": '2', "Coupon $5 off": '5' };
+                    const nameText = document.createElement('div');
+                    nameText.textContent = `${item.name} $${item.price}`;
 
-            const items = [...positional, ...args, ...Object.entries(kwargs).map(([k, v]) => `${k}: $${v}`)];
-
-            items.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = 'argument';
-                div.textContent = item;
-                div.style.animationDelay = `${index * 2}s`;
-                belt.appendChild(div);
-
-                // Track the explanation updates in timeouts array
-                const timeout = setTimeout(() => {
-                    if (!isPaused) {
-                        let stepText = '';
-                        if (index < positional.length) {
-                            outputPositional.textContent = Number(outputPositional.textContent) + Number(item.split('$')[1]);
-                            stepText = `Added ${item} to Positional Arguments (Total: $${outputPositional.textContent}).`;
-                        } else if (index < positional.length + args.length) {
-                            outputArgs.textContent = Number(outputArgs.textContent) + Number(item.split('$')[1]);
-                            stepText = `Added ${item} to *args (Total: $${outputArgs.textContent}).`;
-                        } else {
-                            const [key, value] = item.split(': $');
-                            outputKwargs.textContent = Number(outputKwargs.textContent) + Number(value);
-                            stepText = `Added ${key} to **kwargs (Total: $${outputKwargs.textContent}).`;
-                        }
-
-                        explanation.textContent = stepText;
+                    if (item.type === "keyword") {
+                        discountValue = document.createElement('div');
+                        discountValue.textContent = "-5";
+                        discountValue.style.fontSize = "20px";
+                        discountValue.style.fontWeight = "bold";
+                        discountValue.style.marginTop = "5px";
+                        wrapper.appendChild(nameText);
+                        wrapper.appendChild(discountValue);
+                    } else {
+                        wrapper.appendChild(nameText);
                     }
-                }, (index + 1) * 2000);
 
-                // Store each timeout for later clearing
-                explanationTimeouts.push(timeout);
+                    div.appendChild(wrapper);
+                    belt.appendChild(div);
+
+                    setTimeout(() => {
+                        if (item.type === 'positional') {
+                            totalPositional += item.price;
+                            outputPositional.textContent = totalPositional;
+                        } else if (item.type === 'default') {
+                            totalDefault = item.price;
+                            outputDefault.textContent = item.price;
+                        } else {
+                            totalKeyword = -10; // Update discount
+                            outputKeyword.textContent = "-10";
+                            if (discountValue) discountValue.textContent = "-10";
+                        }
+                        updateTotal(); // Update total value after each change
+                        resolve();
+                    }, 2000);
+                }, delay);
             });
         }
-    </script>
+
+        processItem(items[0], 0)
+            .then(() => processItem(items[1], 0))
+            .then(() => processItem(items[2], 0))
+            .then(() => processItem(items[3], 0));
+    }
+</script>
+
+        
+        
+        
 </body>
 </html>
