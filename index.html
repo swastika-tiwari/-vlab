@@ -130,8 +130,8 @@
                 Default arguments in a function are assigned predefined values during the function declaration. These default values are used if the caller 
                 does not provide a corresponding argument during the function call. The default value is assigned using the assignment(=) operator in the form <i><b>keywordname=value.</b></i>
                 <br><i><b>Syntax:</b> 
-                <br><b>Function Declaration - </b> def function_name(var1, var2=def_val2, var3=def_val3) <br>
-                <b>Function Call - </b> function_name(val1, val2)  
+                <br><b>Function Declaration - </b> def function_name(var1, var2=def_value2, var3=def_value3) <br>
+                <b>Function Call&nbsp;&nbsp;&nbsp;&nbsp; - </b>&nbsp;&nbsp;&nbsp;&nbsp; function_name(value1, value2)  
                 </i><br><br>
                 <b>Coding</b><br>
                 Define a function and specify the parameters. Assign default values to the parameters.<br>
@@ -147,9 +147,9 @@
                 as long as the logic of the code is correct. 
                 This ensures that the function works as intended regardless of the argument order.
                 <br><i><b>Syntax:</b> 
-                <br>def function_name(var1, var2, var3) <b>[Function Declaration]</b><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;function_name(var1=value1, var2=value2, var3=value3) &nbsp;&nbsp;&nbsp;&nbsp;<b>[Function Call]</b>
-                </i><br>
+                <br><b>Function Declaration - </b>def function_name(var1, var2, var3) <br>
+                <b>Function Call&nbsp;&nbsp;&nbsp;&nbsp; - </b> &nbsp;&nbsp;&nbsp;&nbsp;function_name(var1=value1, var2=value2, var3=value3) 
+                </i><br><br>
                 <b>Coding</b><br><br>
                 Define a function and specify the parameters.<br>
                 Call the function with keyword arguments: Specify arguments using the parameter names defined in the function.
@@ -161,19 +161,19 @@
                 Positional Arguments are arguments that must be passed in a specific order when calling a function. If the order of arguments passed differs 
                 from the order of parameters defined, it will result in an unexpected output.
                 <br><i><b>Syntax:</b> 
-                <br>def function_name(var1, var2, var3) <b>[Function Declaration]</b><br>
-                &nbsp;&nbsp;&nbsp;&nbsp;function_name(value1, value2, value3) &nbsp;&nbsp;&nbsp;&nbsp;<b>[Function Call]</b>
+                <br><b>Function Declaration - </b>def function_name(var1, var2, var3)<br>
+                <b>Function Call&nbsp;&nbsp;&nbsp;&nbsp; - </b>&nbsp;&nbsp;&nbsp;&nbsp;function_name(value1, value2, value3) 
                 </i><br><br>
                 <b>Coding</b><br>
                 Define a function and specify the parameters.<br>
                 Call the function with positional arguments: When calling the function, provide arguments in the order that matches the parameter sequence defined in the function.
-                Calling the function in the wrong order will result in an incorrect output. As shown in the second function call statement.
+                Calling the function in the wrong order will result in an incorrect output. As shown in the second function call statement.<br>
                 <img src="images\keyarg.png" alt="keyword1" height="150px" width="800px"><br>
                 Hence, the position of the arguments matters.
 
               </ul>
             </p>
-            <br><br><br>
+            <br><br>
 
             <span><b></b>Applications in Real World</span>
             <ul>
@@ -270,41 +270,33 @@
                   </li>
               </ul>
       
-              <!-- Conclusion -->
-              
           </div>
           </div>
         </div>
 
         <!-- Code -->
-        <div class="container" id="code">
+       <div class="container" id="code">
           <div class="title">Code</div>
           <p>Example program</p>
-          <iframe src="i3.html" width="100%" height="500px" style="border:none;"></iframe>
-          
+          <div class="switch-container">
+            <input
+              class="togswt" type="radio" id="pythonRadio" name="codeSwitch" />
+            <label for="pythonRadio">Python</label>
+          </div>
 
             <input class="togswt" type="radio" id="cppRadio" name="codeSwitch"
-              checked />
-            <label for="cppRadio"></label>
+              checked /> <label for="cppRadio"></label>
 
-          <div class="code-blocks">
-            <div id="pythonCode" class="code-block">
-              <div class="code-content">
-                <pre><code class="language-python">
-                  
-
-                </code></pre>
-                <button class="copy-button">Copy</button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <iframe src="python.html" width="100%" 
+              height="500px" style="border:none;"></iframe>
+          
+       </div>
 
         <!-- Practice -->
         <div class="container" id="practice">
           <div class="title">Practice</div>
           <div class="content">
-            <p> Simulation of how arguments work</p>
+            <p> Simulation of how arguments work<br><br></p>
             <iframe frameBorder="0" height="1000px" id="oc-editor" title="Simulation" src="simulation.html"
             width="1000px" allow="fullscreen"></iframe>
           </div>
@@ -343,7 +335,6 @@
               <li>
                 <span> Taneja S., Kumar N., Python Programming: A modular approach, Pearson Education India, 2018</span>
               </li>
-              
             </ul>
           </div>
         </div>
